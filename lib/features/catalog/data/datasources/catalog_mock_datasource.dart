@@ -1,15 +1,24 @@
 import 'package:talent_x/features/catalog/domain/entities/catalog_item.dart';
 
 class CatalogMockDataSource {
-  BannerEvent getBigEvent() {
-    return BannerEvent(
+
+   static List<BannerEvent> getBigEvent() {
+    return [
+      BannerEvent(
+        title: "Event 1",
+        subtitle: "Concert",
+        imageUrl: "https://images.unsplash.com/photo-1547153760-18fc86324498",
+        createdAt: DateTime(2024, 1, 10)
+      ),
+      BannerEvent(
       title: "Battle de Danse 2026",
       subtitle: "Soutenez le meilleur danseur local dès maintenant !",
       imageUrl: "https://images.unsplash.com/photo-1547153760-18fc86324498", // Image néon/danse
-    );
+      ),
+    ];
   }
 
-  List<FeaturedArtist> getFeaturedArtists() {
+  static List<FeaturedArtist> getFeaturedArtists() {
     return [
       FeaturedArtist(
         id: "1",
