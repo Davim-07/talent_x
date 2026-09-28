@@ -144,7 +144,7 @@ class _VotePageState extends State<VotePage> {
   }
 
   // Helper interne pour afficher les barres de progression sans créer de fichier supplémentaire
-   // Helper interne corrigé pour afficher les barres de progression
+    // Helper interne corrigé pour afficher les barres de progression
   Widget _buildCriterionRow(String label, double percentage, Color progressColor) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
