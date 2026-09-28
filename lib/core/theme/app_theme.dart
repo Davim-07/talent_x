@@ -35,8 +35,11 @@ class AppTheme {
       cardTheme: CardThemeData(
         color: darkSurface,
         elevation: 0,
+        shadowColor: Color(0xFFFF5722).withValues(alpha: 0.5),
         shape: RoundedRectangleBorder(
-          side: const BorderSide(color: darkBorder, width: 1),
+          side: BorderSide(
+            color: const Color(0xFFFF5722).withValues(alpha: 0.6),
+            width: 1.5),
           borderRadius: BorderRadius.circular(8),
         ),
       ),
