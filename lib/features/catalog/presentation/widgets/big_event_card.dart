@@ -5,7 +5,7 @@ class BigEventCard extends ConsumerWidget {
   const BigEventCard({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref){
-    return Card()
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Card();
   }
 }
