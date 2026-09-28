@@ -33,7 +33,7 @@ class BigEventCard extends ConsumerWidget {
               errorBuilder:(context, error, stackTrace) => 
               const Icon(Icons.broken_image, size: 64 , color: Colors.grey ,),
             ),
-            Text(bigEvents[0].title, style: TextStyle(color:))
+            Text(bigEvents[0].title)
           ]
         ),
       ),

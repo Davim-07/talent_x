@@ -9,7 +9,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/catalog',
       name: 'catalog',
-      builder: (context, state) =>  const CatalogScreen()),
+      builder: (context, state) => const CatalogScreen()),
     GoRoute(
       path: '/vote',
       name: 'vote',
