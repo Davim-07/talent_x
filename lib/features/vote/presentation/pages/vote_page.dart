@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../controllers/vote_controller.dart';
-import 'package:flutter/widgets/';
+import 'package:talent_x/features/vote/presentation/widgets/vote_button_widget.dart';
 
 class VotePage extends StatefulWidget {
   const VotePage({super.key});
@@ -144,7 +144,7 @@ class _VotePageState extends State<VotePage> {
   }
 
   // Helper interne pour afficher les barres de progression sans créer de fichier supplémentaire
-   // Helper interne corrigé pour afficher les barres de progression
+    // Helper interne corrigé pour afficher les barres de progression
   Widget _buildCriterionRow(String label, double percentage, Color progressColor) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
