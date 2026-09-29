@@ -7,7 +7,7 @@ class CompetitionDetailHeader extends StatelessWidget {
   final VoidCallback onBackPressed;
 
   const CompetitionDetailHeader({
-    Super.key,
+    super.key,
     required this.title,
     required this.category,
     required this.imageUrl,
@@ -37,10 +37,7 @@ class CompetitionDetailHeader extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Colors.black.withOpacity(0.4),
-                const Color(0xFF12122A),
-              ],
+              colors: [Colors.black.withOpacity(0.4), const Color(0xFF12122A)],
             ),
           ),
         ),
@@ -65,14 +62,21 @@ class CompetitionDetailHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: const Color(0xFF8A2BE2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   category,
-                  style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const SizedBox(height: 8),

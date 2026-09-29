@@ -6,7 +6,7 @@ class CategoryFilterChip extends StatelessWidget {
   final VoidCallback onTap;
 
   const CategoryFilterChip({
-    Super.key,
+    super.key,
     required this.label,
     required this.isSelected,
     required this.onTap,

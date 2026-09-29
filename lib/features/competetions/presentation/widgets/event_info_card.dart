@@ -6,7 +6,7 @@ class EventInfoCard extends StatelessWidget {
   final String description;
 
   const EventInfoCard({
-    Super.key,
+    super.key,
     required this.date,
     required this.prize,
     required this.description,
@@ -35,9 +35,16 @@ class EventInfoCard extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: [
-              const Icon(Icons.calendar_today, color: Color(0xFF8A2BE2), size: 18),
+              const Icon(
+                Icons.calendar_today,
+                color: Color(0xFF8A2BE2),
+                size: 18,
+              ),
               const SizedBox(width: 10),
-              Text(date, style: const TextStyle(color: Colors.white70, fontSize: 14)),
+              Text(
+                date,
+                style: const TextStyle(color: Colors.white70, fontSize: 14),
+              ),
             ],
           ),
           const SizedBox(height: 8),
@@ -45,13 +52,20 @@ class EventInfoCard extends StatelessWidget {
             children: [
               const Icon(Icons.emoji_events, color: Colors.amber, size: 18),
               const SizedBox(width: 10),
-              Text("Grand Prix : $prize", style: const TextStyle(color: Colors.white70, fontSize: 14)),
+              Text(
+                "Grand Prix : $prize",
+                style: const TextStyle(color: Colors.white70, fontSize: 14),
+              ),
             ],
           ),
           const SizedBox(height: 12),
           Text(
             description,
-            style: TextStyle(color: Colors.grey[400], fontSize: 13, height: 1.4),
+            style: TextStyle(
+              color: Colors.grey[400],
+              fontSize: 13,
+              height: 1.4,
+            ),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../domain/entities/competition.dart';
 
 class CompetitionCard extends StatelessWidget {
@@ -6,7 +7,7 @@ class CompetitionCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const CompetitionCard({
-    Super.key,
+    super.key,
     required this.competition,
     required this.onTap,
   });
@@ -37,7 +38,9 @@ class CompetitionCard extends StatelessWidget {
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(20),
+                  ),
                   child: Image.network(
                     competition.imageUrl,
                     height: 180,
@@ -46,7 +49,11 @@ class CompetitionCard extends StatelessWidget {
                     errorBuilder: (context, error, stackTrace) => Container(
                       height: 180,
                       color: const Color(0xFF2A2A4A),
-                      child: const Icon(Icons.image, color: Colors.white54, size: 50),
+                      child: const Icon(
+                        Icons.image,
+                        color: Colors.white54,
+                        size: 50,
+                      ),
                     ),
                   ),
                 ),
@@ -69,7 +76,10 @@ class CompetitionCard extends StatelessWidget {
                   top: 12,
                   left: 12,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFF8A2BE2),
                       borderRadius: BorderRadius.circular(12),
@@ -90,7 +100,11 @@ class CompetitionCard extends StatelessWidget {
                   left: 12,
                   child: Row(
                     children: [
-                      const Icon(Icons.emoji_events, color: Colors.amber, size: 18),
+                      const Icon(
+                        Icons.emoji_events,
+                        color: Colors.amber,
+                        size: 18,
+                      ),
                       const SizedBox(width: 6),
                       Text(
                         "Prix: ${competition.prize}",
@@ -141,17 +155,28 @@ class CompetitionCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.people_outline, color: Colors.grey, size: 16),
+                          const Icon(
+                            Icons.people_outline,
+                            color: Colors.grey,
+                            size: 16,
+                          ),
                           const SizedBox(width: 6),
                           Text(
                             "${competition.participantsCount} candidats",
-                            style: const TextStyle(color: Colors.grey, fontSize: 12),
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            ),
                           ),
                         ],
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.timer_outlined, color: Color(0xFFFF5722), size: 16),
+                          const Icon(
+                            Icons.timer_outlined,
+                            color: Color(0xFFFF5722),
+                            size: 16,
+                          ),
                           const SizedBox(width: 6),
                           Text(
                             "Fin : ${competition.deadline}",
@@ -185,10 +210,17 @@ class CompetitionCard extends StatelessWidget {
                         children: [
                           Text(
                             "S'inscrire (${competition.entryFee.toInt()} BIF)",
-                            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           const SizedBox(width: 8),
-                          const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 18),
+                          const Icon(
+                            Icons.arrow_forward_rounded,
+                            color: Colors.white,
+                            size: 18,
+                          ),
                         ],
                       ),
                     ),

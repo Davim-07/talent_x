@@ -5,7 +5,6 @@ import 'core/theme/app_theme.dart';
 import 'core/router/app_router.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
