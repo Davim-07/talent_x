@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:talent_x/artist_app/features/profile/presentation/pages/profile_page.dart';
 import 'package:talent_x/artist_app/features/vote/presentation/pages/vote_page.dart';
 import 'package:talent_x/artist_app/features/catalog/presentation/pages/home_catalog_page.dart';
 
@@ -13,6 +14,11 @@ final GoRouter appRouter = GoRouter(
       path: '/vote',
       name: 'vote',
       builder: (context , state) => const VotePage(),
-    )
+    ),
+    GoRoute(
+      path: '/profile',
+      name: 'profile',
+      builder: (context, state) => const ProfilePage()
+    ),
   ]);
  
