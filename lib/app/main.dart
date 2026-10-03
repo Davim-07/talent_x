@@ -20,7 +20,7 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp.router(
       title: 'TalentX',
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeMode,
