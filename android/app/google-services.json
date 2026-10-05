@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "16056185865",
+    "project_id": "talentx-458f4",
+    "storage_bucket": "talentx-458f4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16056185865:android:ba750fa224f9ec54b1f4d8",
+        "android_client_info": {
+          "package_name": "com.koralogix.talent_x"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeiIQ0nIESO3Gr3RUj6C80mWdVnIS748A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
