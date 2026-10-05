@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:talent_x/artist_app/core/theme/providers/theme_provider.dart';
 import 'package:talent_x/artist_app/core/theme/app_theme.dart';
-import 'package:talent_x/app/router/app_router.dart';
+import 'package:talent_x/apps/router/app_router.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
