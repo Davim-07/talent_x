@@ -1,7 +1,7 @@
-import 'package:talent_x/artist_app/features/vote/domain/entities/vote.dart';
+import '../../domain/entities/vote.dart';
 
 class CandidateModel extends Candidate {
-  const CandidateModel({
+  CandidateModel({
     required super.id,
     required super.name,
     required super.role,
@@ -10,10 +10,19 @@ class CandidateModel extends Candidate {
 
   factory CandidateModel.fromJson(Map<String, dynamic> json) {
     return CandidateModel(
-      id: json['id'],
-      name: json['name'],
-      role: json['role'],
-      imageUrl: json['imageUrl'],
+      id: json['id'] as String,
+      name: json['name'] as String,
+      role: json['role'] as String,
+      imageUrl: json['imageUrl'] as String? ?? '',
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'role': role,
+      'imageUrl': imageUrl,
+    };
   }
 }

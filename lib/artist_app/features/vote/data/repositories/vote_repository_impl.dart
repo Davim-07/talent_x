@@ -1,11 +1,9 @@
-import 'package:talent_x/artist_app/features/vote/domain/entities/vote.dart';
-import 'package:talent_x/artist_app/features/vote/domain/repositories/vote_repository.dart';
-import 'package:talent_x/artist_app/features/vote/data/datasources/vote_mock_datasources.dart';
+import '../../domain/entities/vote.dart';
+import '../../domain/repositories/vote_repository.dart';
+import '../datasources/vote_mock_datasources.dart';
 
 class VoteRepositoryImpl implements VoteRepository {
-  final VoteMockDataSource dataSource;
-
-  VoteRepositoryImpl(this.dataSource);
+  final VoteDataSource dataSource = VoteMockDataSourceImpl();
 
   @override
   Future<List<Candidate>> getCandidates() async {
@@ -14,6 +12,6 @@ class VoteRepositoryImpl implements VoteRepository {
 
   @override
   Future<bool> submitVote(String candidateId) async {
-    return await dataSource.castVote(candidateId);
+    return await dataSource.sendVote(candidateId);
   }
 }

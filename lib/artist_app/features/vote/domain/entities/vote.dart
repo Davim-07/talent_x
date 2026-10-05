@@ -4,7 +4,7 @@ class Candidate {
   final String role;
   final String imageUrl;
 
-  const Candidate({
+  Candidate({
     required this.id,
     required this.name,
     required this.role,

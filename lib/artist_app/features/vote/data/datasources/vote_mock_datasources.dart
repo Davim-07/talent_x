@@ -1,17 +1,42 @@
-import 'package:talent_x/artist_app/features/vote/domain/entities/vote.dart';
+import '../models/vote_model.dart';
 
-class VoteMockDataSource {
-  Future<List<Candidate>> fetchCandidates() async {
-    await Future.delayed(const Duration(milliseconds: 500)); // Simulation réseau
-    return [
-      const Candidate(id: '1', name: 'Aïsha Bamon', role: 'Chanteuse', imageUrl: 'https://placeholder.com'),
-      const Candidate(id: '2', name: 'Nasser Gasino', role: 'Compositeur', imageUrl: 'https://placeholder.com'),
-      const Candidate(id: '3', name: 'Ronée A.', role: 'Dessinatrice', imageUrl: 'https://placeholder.com'),
+abstract class VoteDataSource {
+  Future<List<CandidateModel>> fetchCandidates();
+  Future<bool> sendVote(String candidateId);
+}
+
+class VoteMockDataSourceImpl implements VoteDataSource {
+  @override
+  Future<List<CandidateModel>> fetchCandidates() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    
+    final List<Map<String, dynamic>> mockData = [
+      {
+        'id': '1',
+        'name': 'Aïsha Bamon',
+        'role': 'Chanteuse',
+        'imageUrl': 'https://i.pravatar.cc/150?img=60',
+      },
+      {
+        'id': '2',
+        'name': 'Nasser Gasino',
+        'role': 'Compositeur',
+        'imageUrl': 'https://i.pravatar.cc/150?img=32',
+      },
+      {
+        'id': '3',
+        'name': 'Ronée A.',
+        'role': 'Dessinatrice',
+        'imageUrl': 'https://i.pravatar.cc/150?img=12',
+      },
     ];
+
+    return mockData.map((json) => CandidateModel.fromJson(json)).toList();
   }
 
-  Future<bool> castVote(String candidateId) async {
-    await Future.delayed(const Duration(milliseconds: 300));
-    return true;
+  @override
+  Future<bool> sendVote(String candidateId) async {
+    await Future.delayed(const Duration(milliseconds: 800));
+    return true; 
   }
 }
