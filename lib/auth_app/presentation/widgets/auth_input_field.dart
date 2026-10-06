@@ -8,6 +8,7 @@ class AuthInputField extends StatelessWidget {
   final bool isObscured;
   final VoidCallback? onToggleObscure;
   final bool isPhone;
+  final TextEditingController? controller;
 
   const AuthInputField({
     super.key,
@@ -18,6 +19,7 @@ class AuthInputField extends StatelessWidget {
     this.isObscured = false,
     this.onToggleObscure,
     this.isPhone = false,
+    this.controller,
   });
 
   @override
@@ -62,6 +64,7 @@ class AuthInputField extends StatelessWidget {
               ],
               Expanded(
                 child: TextField(
+                  controller: controller,
                   obscureText: isPassword && isObscured,
                   style: const TextStyle(color: Colors.white, fontSize: 13),
                   decoration: InputDecoration(

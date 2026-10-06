@@ -40,8 +40,9 @@ class CompetitionRepositoryImpl implements CompetitionRepository {
       return schemas.map((s) => CompetitionModel.fromSchema(s)).where((comp) {
         // Tente de parser la date d'échéance pour vérifier si elle est encore active
         final deadlineDate = DateTime.tryParse(comp.deadline);
-        if (deadlineDate == null)
+        if (deadlineDate == null) {
           return true; // Conserve par défaut si format invalide
+        }
         return deadlineDate.isAfter(now);
       }).toList();
     });
@@ -110,6 +111,37 @@ class CompetitionRepositoryImpl implements CompetitionRepository {
       );
     } catch (_) {
       // Si hors-ligne, suppression de sécurité locale ou gestion de file d'attente
+    }
+  }
+
+  // ===========================================================================
+  // 7. SAVE COMPETITION (OFFLINE-FIRST: ISAR PUIS FIRESTORE)
+  // ===========================================================================
+  @override
+  Future<void> saveCompetition(Competition competition) async {
+    final model = CompetitionModel(
+      id: competition.id,
+      title: competition.title,
+      category: competition.category,
+      description: competition.description,
+      imageUrl: competition.imageUrl,
+      deadline: competition.deadline,
+    );
+
+    // 1. Sauvegarder localement d'abord (offline-first)
+    await _localDS.save<CompetitionSchema>(model.toSchema(isSynced: false));
+
+    // 2. Tenter la synchronisation avec Firestore
+    try {
+      await _remoteDS.setDocument(
+        collectionPath: 'competitions',
+        docId: competition.id,
+        data: model.toFirestore(),
+      );
+      // Marquer comme synchronisé
+      await _localDS.save<CompetitionSchema>(model.toSchema(isSynced: true));
+    } catch (_) {
+      // Silencieux si hors-ligne : synchronisera plus tard
     }
   }
 

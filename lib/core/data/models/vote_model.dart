@@ -14,13 +14,22 @@ class VoteModel extends Vote {
 
   // 1. Depuis Firestore -> VoteModel
   factory VoteModel.fromFirestore(Map<String, dynamic> json, String docId) {
+    DateTime parsedDate;
+    if (json['createdAt'] is Timestamp) {
+      parsedDate = (json['createdAt'] as Timestamp).toDate();
+    } else if (json['createdAt'] is String) {
+      parsedDate = DateTime.tryParse(json['createdAt'] as String) ?? DateTime.now();
+    } else {
+      parsedDate = DateTime.now();
+    }
+
     return VoteModel(
-      id: docId,
-      artistId: json['artistId'] as String,
-      competitionId: json['competitionId'] as String,
-      voterId: json['voterId'] as String,
-      txPoints: json['txPoints'] ?? 2,
-      createdAt: (json['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      id: (json['id'] as String?) ?? docId,
+      artistId: (json['artistId'] as String?) ?? '',
+      competitionId: (json['competitionId'] as String?) ?? '',
+      voterId: (json['voterId'] as String?) ?? '',
+      txPoints: (json['txPoints'] as int?) ?? 2,
+      createdAt: parsedDate,
     );
   }
 

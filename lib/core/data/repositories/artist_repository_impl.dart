@@ -64,6 +64,36 @@ class ArtistRepositoryImpl implements ArtistRepository {
   }
 
   @override
+  Future<void> saveArtist(Artist artist) async {
+    final model = ArtistModel(
+      id: artist.id.isNotEmpty
+          ? artist.id
+          : DateTime.now().millisecondsSinceEpoch.toString(),
+      name: artist.name,
+      imageUrl: artist.imageUrl,
+      category: artist.category,
+    );
+
+    // 1. Sauvegarde locale dans Isar (immédiate)
+    final schema = model.toSchema(isSynced: false);
+    await _localDS.save<ArtistSchema>(schema);
+
+    // 2. Synchronisation distante dans Firestore
+    try {
+      await _remoteDS.setDocument(
+        collectionPath: 'artists',
+        docId: model.id,
+        data: model.toFirestore(),
+      );
+
+      schema.isSynced = true;
+      await _localDS.save<ArtistSchema>(schema);
+    } catch (_) {
+      // Conserve isSynced = false pour le mode hors-ligne
+    }
+  }
+
+  @override
   Future<void> deleteArtist(String artistId) async {
     // 1. Suppression locale dans Isar
     final schemas = await _localDS.getAll<ArtistSchema>();

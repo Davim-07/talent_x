@@ -10,9 +10,9 @@ class BigEventModel extends BigEvent {
 
   factory BigEventModel.fromFirestore(Map<String, dynamic> json, String docId) {
     return BigEventModel(
-      title: json['title'],
-      subtitle: json['subtitle'],
-      imageUrl: json['imageUrl'],
+      title: (json['title'] as String?) ?? docId,
+      subtitle: (json['subtitle'] as String?) ?? '',
+      imageUrl: (json['imageUrl'] as String?) ?? '',
     );
   }
 

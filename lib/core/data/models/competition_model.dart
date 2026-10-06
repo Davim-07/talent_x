@@ -16,12 +16,12 @@ class CompetitionModel extends Competition {
     String docId,
   ) {
     return CompetitionModel(
-      id: docId,
-      title: json['title'] as String,
-      category: json['category'] as String,
-      description: json['description'] as String,
-      imageUrl: json['imageUrl'] as String,
-      deadline: json['deadline'] as String,
+      id: (json['id'] as String?) ?? docId,
+      title: (json['title'] as String?) ?? 'Compétition',
+      category: (json['category'] as String?) ?? 'Général',
+      description: (json['description'] as String?) ?? '',
+      imageUrl: (json['imageUrl'] as String?) ?? '',
+      deadline: (json['deadline'] as String?) ?? '',
     );
   }
 

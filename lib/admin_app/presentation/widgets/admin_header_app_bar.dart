@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:talent_x/auth_app/presentation/controllers/auth_controller.dart';
 
-class AdminHeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
+class AdminHeaderAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final String subtitle;
 
   const AdminHeaderAppBar({
@@ -9,7 +11,7 @@ class AdminHeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AppBar(
       backgroundColor: const Color(0xFF090A16),
       elevation: 0,
@@ -33,7 +35,10 @@ class AdminHeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               const Text(
                 'Espace Administrateur',
-                style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold),
               ),
               Text(
                 subtitle,
@@ -44,16 +49,12 @@ class AdminHeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
-        Container(
-          margin: const EdgeInsets.only(right: 16),
-          decoration: const BoxDecoration(
-            color: Color(0xFF1B1B36),
-            shape: BoxShape.circle,
-          ),
-          child: IconButton(
-            icon: const Icon(Icons.settings, color: Colors.white70, size: 20),
-            onPressed: () {},
-          ),
+        IconButton(
+          icon: const Icon(Icons.logout, color: Colors.pinkAccent, size: 20),
+          tooltip: 'Déconnexion',
+          onPressed: () {
+            ref.read(authControllerProvider.notifier).logout(context);
+          },
         ),
       ],
     );

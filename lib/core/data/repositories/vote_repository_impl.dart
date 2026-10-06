@@ -105,6 +105,7 @@ class VoteRepositoryImpl implements VoteRepository {
   // ===========================================================================
   @override
   Stream<List<Vote>> getVotesForArtist() {
+    _syncVotesFromRemote();
     // Écoute Isar en temps réel
     return _localDS.watchAll<VoteSchema>().map((schemas) {
       return schemas.map((s) => VoteModel.fromSchema(s)).toList();
@@ -116,6 +117,7 @@ class VoteRepositoryImpl implements VoteRepository {
   // ===========================================================================
   @override
   Stream<List<Vote>> getVotesForCompetition(String competitionId) {
+    _syncVotesFromRemote();
     return _localDS.watchAll<VoteSchema>().map((schemas) {
       return schemas
           .where((s) => s.competitionId == competitionId)
@@ -129,6 +131,7 @@ class VoteRepositoryImpl implements VoteRepository {
   // ===========================================================================
   @override
   Stream<List<JuryRank>> getAllJuryRanks(String competitionId) {
+    _syncJuryRanksFromRemote();
     return _localDS.watchAll<JuryRankSchema>().map((schemas) {
       return schemas
           .where((s) => s.competitionId == competitionId)
@@ -199,5 +202,27 @@ class VoteRepositoryImpl implements VoteRepository {
         v.voterId == currentUserId &&
         v.competitionId == competitionId &&
         v.artistId == artistId);
+  }
+
+  void _syncVotesFromRemote() async {
+    try {
+      final remoteDocs = await _remoteDS.getCollection(collectionPath: 'votes');
+      final schemas = remoteDocs.map((doc) {
+        final model = VoteModel.fromFirestore(doc, doc['id'] ?? '');
+        return model.toSchema(isSynced: true);
+      }).toList();
+      await _localDS.saveAll<VoteSchema>(schemas);
+    } catch (_) {}
+  }
+
+  void _syncJuryRanksFromRemote() async {
+    try {
+      final remoteDocs = await _remoteDS.getCollection(collectionPath: 'jury_ranks');
+      final schemas = remoteDocs.map((doc) {
+        final model = JuryRankModel.fromFirestore(doc, doc['id'] ?? '');
+        return model.toSchema(isSynced: true);
+      }).toList();
+      await _localDS.saveAll<JuryRankSchema>(schemas);
+    } catch (_) {}
   }
 }

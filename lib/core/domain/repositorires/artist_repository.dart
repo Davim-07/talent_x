@@ -13,6 +13,9 @@ abstract class ArtistRepository {
   /// Obtenir les artistes triés par points TX pour une compétition donnée
   Future<List<Artist>> getArtistsSortedByPoints(String competitionId);
 
+  /// Sauvegarder ou mettre à jour un artiste
+  Future<void> saveArtist(Artist artist);
+
   /// Supprimer un artiste spécifique par son ID
   Future<void> deleteArtist(String artistId);
 }

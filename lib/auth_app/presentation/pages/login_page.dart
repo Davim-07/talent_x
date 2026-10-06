@@ -4,11 +4,26 @@ import '../controllers/auth_controller.dart';
 import '../widgets/auth_input_field.dart';
 import '../widgets/role_selector_card.dart';
 
-class LoginPage extends ConsumerWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends ConsumerState<LoginPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(authControllerProvider);
     final controller = ref.read(authControllerProvider.notifier);
 
@@ -104,10 +119,11 @@ class LoginPage extends ConsumerWidget {
                 ),
                 child: Column(
                   children: [
-                    const AuthInputField(
+                    AuthInputField(
                       label: 'Adresse e-mail',
                       hint: 'exemple@talentx.com',
                       prefixIcon: Icons.email_outlined,
+                      controller: _emailController,
                     ),
                     const SizedBox(height: 14),
                     AuthInputField(
@@ -117,6 +133,7 @@ class LoginPage extends ConsumerWidget {
                       isPassword: true,
                       isObscured: state.isPasswordObscured,
                       onToggleObscure: controller.togglePasswordVisibility,
+                      controller: _passwordController,
                     ),
                     const SizedBox(height: 12),
 
@@ -147,6 +164,31 @@ class LoginPage extends ConsumerWidget {
                         ),
                       ],
                     ),
+
+                    // Message d'erreur
+                    if (state.errorMessage != null) ...[
+                      const SizedBox(height: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.red.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.red.withValues(alpha: 0.3)),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.error_outline, color: Colors.red, size: 16),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                state.errorMessage!,
+                                style: const TextStyle(color: Colors.red, fontSize: 11),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                     const SizedBox(height: 16),
 
                     // Bouton Se Connecter
@@ -164,15 +206,29 @@ class LoginPage extends ConsumerWidget {
                           backgroundColor: Colors.transparent,
                           shadowColor: Colors.transparent,
                         ),
-                        onPressed: () => controller.login(context),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Se connecter', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)),
-                            SizedBox(width: 8),
-                            Icon(Icons.arrow_forward, color: Colors.white, size: 18),
-                          ],
-                        ),
+                        onPressed: state.isLoading
+                            ? null
+                            : () => controller.login(
+                                  context,
+                                  email: _emailController.text.trim(),
+                                ),
+                        child: state.isLoading
+                            ? const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Se connecter', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)),
+                                  SizedBox(width: 8),
+                                  Icon(Icons.arrow_forward, color: Colors.white, size: 18),
+                                ],
+                              ),
                       ),
                     ),
                   ],

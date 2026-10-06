@@ -3,11 +3,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../controllers/auth_controller.dart';
 import '../widgets/auth_input_field.dart';
 
-class RegisterPage extends ConsumerWidget {
+class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends ConsumerState<RegisterPage> {
+  final _nomController = TextEditingController();
+  final _prenomController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nomController.dispose();
+    _prenomController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(authControllerProvider);
     final controller = ref.read(authControllerProvider.notifier);
 
@@ -74,29 +97,33 @@ class RegisterPage extends ConsumerWidget {
                 ),
                 child: Column(
                   children: [
-                    const AuthInputField(
+                    AuthInputField(
                       label: 'Nom',
                       hint: 'Entrez votre nom',
                       prefixIcon: Icons.person_outline,
+                      controller: _nomController,
                     ),
                     const SizedBox(height: 12),
-                    const AuthInputField(
+                    AuthInputField(
                       label: 'Prénom',
                       hint: 'Entrez votre prénom',
                       prefixIcon: Icons.person_outline,
+                      controller: _prenomController,
                     ),
                     const SizedBox(height: 12),
-                    const AuthInputField(
+                    AuthInputField(
                       label: 'Numéro de téléphone',
                       hint: 'Ex. 68 38 88 01',
                       prefixIcon: Icons.phone_outlined,
                       isPhone: true,
+                      controller: _phoneController,
                     ),
                     const SizedBox(height: 12),
-                    const AuthInputField(
+                    AuthInputField(
                       label: 'Email',
                       hint: 'Entrez votre adresse e-mail',
                       prefixIcon: Icons.email_outlined,
+                      controller: _emailController,
                     ),
                     const SizedBox(height: 12),
                     AuthInputField(
@@ -106,6 +133,7 @@ class RegisterPage extends ConsumerWidget {
                       isPassword: true,
                       isObscured: state.isPasswordObscured,
                       onToggleObscure: controller.togglePasswordVisibility,
+                      controller: _passwordController,
                     ),
                     const SizedBox(height: 12),
                     AuthInputField(
@@ -115,6 +143,7 @@ class RegisterPage extends ConsumerWidget {
                       isPassword: true,
                       isObscured: state.isConfirmPasswordObscured,
                       onToggleObscure: controller.toggleConfirmPasswordVisibility,
+                      controller: _confirmPasswordController,
                     ),
                     const SizedBox(height: 14),
 
@@ -155,6 +184,31 @@ class RegisterPage extends ConsumerWidget {
                         ),
                       ],
                     ),
+
+                    // Message d'erreur
+                    if (state.errorMessage != null) ...[
+                      const SizedBox(height: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.red.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.red.withValues(alpha: 0.3)),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.error_outline, color: Colors.red, size: 16),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                state.errorMessage!,
+                                style: const TextStyle(color: Colors.red, fontSize: 11),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                     const SizedBox(height: 16),
 
                     // Bouton Créer mon compte
@@ -172,17 +226,36 @@ class RegisterPage extends ConsumerWidget {
                           backgroundColor: Colors.transparent,
                           shadowColor: Colors.transparent,
                         ),
-                        onPressed: () => controller.login(context),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.person_add_alt, color: Colors.white, size: 18),
-                            SizedBox(width: 8),
-                            Text('Créer mon compte', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)),
-                            SizedBox(width: 8),
-                            Icon(Icons.arrow_forward, color: Colors.white, size: 18),
-                          ],
-                        ),
+                        onPressed: state.isLoading
+                            ? null
+                            : () => controller.register(
+                                  context,
+                                  nom: _nomController.text.trim(),
+                                  prenom: _prenomController.text.trim(),
+                                  phone: _phoneController.text.trim(),
+                                  email: _emailController.text.trim(),
+                                  password: _passwordController.text,
+                                  confirmPassword: _confirmPasswordController.text,
+                                ),
+                        child: state.isLoading
+                            ? const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.person_add_alt, color: Colors.white, size: 18),
+                                  SizedBox(width: 8),
+                                  Text('Créer mon compte', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)),
+                                  SizedBox(width: 8),
+                                  Icon(Icons.arrow_forward, color: Colors.white, size: 18),
+                                ],
+                              ),
                       ),
                     ),
                   ],

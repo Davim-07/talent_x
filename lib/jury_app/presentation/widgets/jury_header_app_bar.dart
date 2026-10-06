@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:talent_x/auth_app/presentation/controllers/auth_controller.dart';
 
-class JuryHeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
+class JuryHeaderAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const JuryHeaderAppBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AppBar(
       backgroundColor: const Color(0xFF0D0E1E),
       elevation: 0,
@@ -27,7 +29,7 @@ class JuryHeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           const SizedBox(width: 16),
           const Text(
-            'Membre de jury',
+            'Espace Jury',
             style: TextStyle(
               color: Colors.white70,
               fontSize: 14,
@@ -37,16 +39,12 @@ class JuryHeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
-        Container(
-          margin: const EdgeInsets.only(right: 16),
-          decoration: const BoxDecoration(
-            color: Color(0xFF1B1B36),
-            shape: BoxShape.circle,
-          ),
-          child: IconButton(
-            icon: const Icon(Icons.settings, color: Colors.white70, size: 20),
-            onPressed: () {},
-          ),
+        IconButton(
+          icon: const Icon(Icons.logout, color: Colors.pinkAccent, size: 20),
+          tooltip: 'Déconnexion',
+          onPressed: () {
+            ref.read(authControllerProvider.notifier).logout(context);
+          },
         ),
       ],
     );

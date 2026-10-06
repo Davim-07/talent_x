@@ -9,17 +9,17 @@ class ArtistModel extends Artist {
     required super.category,
   });
 
-  //1.Depuis Firestore -> ArtistModel
+  // 1. Depuis Firestore -> ArtistModel (avec fallbacks sécurisés)
   factory ArtistModel.fromFirestore(Map<String, dynamic> json, String docId) {
     return ArtistModel(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      imageUrl: json['imageUrl'] as String,
-      category: json['category'] as String,
+      id: (json['id'] as String?) ?? docId,
+      name: (json['name'] as String?) ?? 'Artiste sans nom',
+      imageUrl: (json['imageUrl'] as String?) ?? '',
+      category: (json['category'] as String?) ?? 'Général',
     );
   }
 
-  //2.Depuis Schema ISar -> ArtistModel
+  // 2. Depuis Schema Isar -> ArtistModel
   factory ArtistModel.fromSchema(ArtistSchema schema) {
     return ArtistModel(
       id: schema.id,
@@ -29,7 +29,7 @@ class ArtistModel extends Artist {
     );
   }
 
-  //3. ArtistModel -> Map Firestore
+  // 3. ArtistModel -> Map Firestore
   Map<String, dynamic> toFirestore() {
     return {
       'id': id,
@@ -39,7 +39,7 @@ class ArtistModel extends Artist {
     };
   }
 
-  // 4. VoteModel -> Schéma Isar
+  // 4. ArtistModel -> Schéma Isar
   ArtistSchema toSchema({bool isSynced = false}) {
     return ArtistSchema()
       ..id = id

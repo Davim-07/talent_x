@@ -1,7 +1,5 @@
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
 
 // Imports des schémas
 import 'package:talent_x/core/data/local/schemas/artist_schema.dart';

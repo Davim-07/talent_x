@@ -11,10 +11,10 @@ class JuryRankModel extends JuryRank {
 
   factory JuryRankModel.fromFirestore(Map<String, dynamic> json, String docId) {
     return JuryRankModel(
-      juryId: json['juryId'] as String,
-      artistId: json['artistid'] as String,
-      competitionId: json['competitionId'] as String,
-      rank: json['rank'] as int,
+      juryId: (json['juryId'] as String?) ?? '',
+      artistId: (json['artistId'] as String?) ?? (json['artistid'] as String?) ?? '',
+      competitionId: (json['competitionId'] as String?) ?? '',
+      rank: (json['rank'] as int?) ?? 0,
     );
   }
 

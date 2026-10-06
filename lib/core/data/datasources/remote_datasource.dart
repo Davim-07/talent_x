@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreRemoteDataSource {
@@ -13,19 +12,27 @@ class FirestoreRemoteDataSource {
     required String docId,
     required Map<String, dynamic> data,
   }) async {
+    // S'assure que l'ID est également inclus dans les données du document
+    final dataToSave = Map<String, dynamic>.from(data);
+    dataToSave['id'] = dataToSave['id'] ?? docId;
+
     await _firestore.collection(collectionPath).doc(docId).set(
-          data,
+          dataToSave,
           SetOptions(merge: true),
         );
   }
 
-  /// Récupérer un document
+  /// Récupérer un document unique
   Future<Map<String, dynamic>?> getDocument({
     required String collectionPath,
     required String docId,
   }) async {
     final doc = await _firestore.collection(collectionPath).doc(docId).get();
-    return doc.data();
+    if (!doc.exists || doc.data() == null) return null;
+
+    final data = Map<String, dynamic>.from(doc.data()!);
+    data['id'] = data['id'] ?? doc.id;
+    return data;
   }
 
   /// Récupérer tous les documents d'une collection
@@ -33,7 +40,11 @@ class FirestoreRemoteDataSource {
     required String collectionPath,
   }) async {
     final snapshot = await _firestore.collection(collectionPath).get();
-    return snapshot.docs.map((doc) => doc.data()).toList();
+    return snapshot.docs.map((doc) {
+      final data = Map<String, dynamic>.from(doc.data());
+      data['id'] = data['id'] ?? doc.id;
+      return data;
+    }).toList();
   }
 
   /// Écouter une collection en temps réel (Stream)
@@ -41,7 +52,11 @@ class FirestoreRemoteDataSource {
     required String collectionPath,
   }) {
     return _firestore.collection(collectionPath).snapshots().map(
-          (snapshot) => snapshot.docs.map((doc) => doc.data()).toList(),
+          (snapshot) => snapshot.docs.map((doc) {
+            final data = Map<String, dynamic>.from(doc.data());
+            data['id'] = data['id'] ?? doc.id;
+            return data;
+          }).toList(),
         );
   }
 

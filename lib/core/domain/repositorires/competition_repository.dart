@@ -12,4 +12,6 @@ abstract class CompetitionRepository {
   Competition searchCompetition(); //rechercher une competition - requete Read
 
   Future<void> deleteCompetition(); //supprimer une competition -requete Delete
+
+  Future<void> saveCompetition(Competition competition); //sauvegarder/créer une competition
 }
