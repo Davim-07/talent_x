@@ -7,6 +7,7 @@ class BigEventSchema {
   Id localId = Isar.autoIncrement;
 
   @Index(unique: true, replace: true)
+  late String id;
   late String title;
   late String subtitle;
   late String imageUrl;

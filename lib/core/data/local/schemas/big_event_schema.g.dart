@@ -17,23 +17,28 @@ const BigEventSchemaSchema = CollectionSchema(
   name: r'BigEventSchema',
   id: 2950715249124627695,
   properties: {
-    r'imageUrl': PropertySchema(
+    r'id': PropertySchema(
       id: 0,
+      name: r'id',
+      type: IsarType.string,
+    ),
+    r'imageUrl': PropertySchema(
+      id: 1,
       name: r'imageUrl',
       type: IsarType.string,
     ),
     r'isSynced': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'isSynced',
       type: IsarType.bool,
     ),
     r'subtitle': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'subtitle',
       type: IsarType.string,
     ),
     r'title': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'title',
       type: IsarType.string,
     )
@@ -44,14 +49,14 @@ const BigEventSchemaSchema = CollectionSchema(
   deserializeProp: _bigEventSchemaDeserializeProp,
   idName: r'localId',
   indexes: {
-    r'title': IndexSchema(
-      id: -7636685945352118059,
-      name: r'title',
+    r'id': IndexSchema(
+      id: -3268401673993471357,
+      name: r'id',
       unique: true,
       replace: true,
       properties: [
         IndexPropertySchema(
-          name: r'title',
+          name: r'id',
           type: IndexType.hash,
           caseSensitive: true,
         )
@@ -85,6 +90,7 @@ int _bigEventSchemaEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  bytesCount += 3 + object.id.length * 3;
   bytesCount += 3 + object.imageUrl.length * 3;
   bytesCount += 3 + object.subtitle.length * 3;
   bytesCount += 3 + object.title.length * 3;
@@ -97,10 +103,11 @@ void _bigEventSchemaSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.imageUrl);
-  writer.writeBool(offsets[1], object.isSynced);
-  writer.writeString(offsets[2], object.subtitle);
-  writer.writeString(offsets[3], object.title);
+  writer.writeString(offsets[0], object.id);
+  writer.writeString(offsets[1], object.imageUrl);
+  writer.writeBool(offsets[2], object.isSynced);
+  writer.writeString(offsets[3], object.subtitle);
+  writer.writeString(offsets[4], object.title);
 }
 
 BigEventSchema _bigEventSchemaDeserialize(
@@ -110,11 +117,12 @@ BigEventSchema _bigEventSchemaDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = BigEventSchema();
-  object.imageUrl = reader.readString(offsets[0]);
-  object.isSynced = reader.readBool(offsets[1]);
+  object.id = reader.readString(offsets[0]);
+  object.imageUrl = reader.readString(offsets[1]);
+  object.isSynced = reader.readBool(offsets[2]);
   object.localId = id;
-  object.subtitle = reader.readString(offsets[2]);
-  object.title = reader.readString(offsets[3]);
+  object.subtitle = reader.readString(offsets[3]);
+  object.title = reader.readString(offsets[4]);
   return object;
 }
 
@@ -128,10 +136,12 @@ P _bigEventSchemaDeserializeProp<P>(
     case 0:
       return (reader.readString(offset)) as P;
     case 1:
-      return (reader.readBool(offset)) as P;
-    case 2:
       return (reader.readString(offset)) as P;
+    case 2:
+      return (reader.readBool(offset)) as P;
     case 3:
+      return (reader.readString(offset)) as P;
+    case 4:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -152,57 +162,57 @@ void _bigEventSchemaAttach(
 }
 
 extension BigEventSchemaByIndex on IsarCollection<BigEventSchema> {
-  Future<BigEventSchema?> getByTitle(String title) {
-    return getByIndex(r'title', [title]);
+  Future<BigEventSchema?> getById(String id) {
+    return getByIndex(r'id', [id]);
   }
 
-  BigEventSchema? getByTitleSync(String title) {
-    return getByIndexSync(r'title', [title]);
+  BigEventSchema? getByIdSync(String id) {
+    return getByIndexSync(r'id', [id]);
   }
 
-  Future<bool> deleteByTitle(String title) {
-    return deleteByIndex(r'title', [title]);
+  Future<bool> deleteById(String id) {
+    return deleteByIndex(r'id', [id]);
   }
 
-  bool deleteByTitleSync(String title) {
-    return deleteByIndexSync(r'title', [title]);
+  bool deleteByIdSync(String id) {
+    return deleteByIndexSync(r'id', [id]);
   }
 
-  Future<List<BigEventSchema?>> getAllByTitle(List<String> titleValues) {
-    final values = titleValues.map((e) => [e]).toList();
-    return getAllByIndex(r'title', values);
+  Future<List<BigEventSchema?>> getAllById(List<String> idValues) {
+    final values = idValues.map((e) => [e]).toList();
+    return getAllByIndex(r'id', values);
   }
 
-  List<BigEventSchema?> getAllByTitleSync(List<String> titleValues) {
-    final values = titleValues.map((e) => [e]).toList();
-    return getAllByIndexSync(r'title', values);
+  List<BigEventSchema?> getAllByIdSync(List<String> idValues) {
+    final values = idValues.map((e) => [e]).toList();
+    return getAllByIndexSync(r'id', values);
   }
 
-  Future<int> deleteAllByTitle(List<String> titleValues) {
-    final values = titleValues.map((e) => [e]).toList();
-    return deleteAllByIndex(r'title', values);
+  Future<int> deleteAllById(List<String> idValues) {
+    final values = idValues.map((e) => [e]).toList();
+    return deleteAllByIndex(r'id', values);
   }
 
-  int deleteAllByTitleSync(List<String> titleValues) {
-    final values = titleValues.map((e) => [e]).toList();
-    return deleteAllByIndexSync(r'title', values);
+  int deleteAllByIdSync(List<String> idValues) {
+    final values = idValues.map((e) => [e]).toList();
+    return deleteAllByIndexSync(r'id', values);
   }
 
-  Future<Id> putByTitle(BigEventSchema object) {
-    return putByIndex(r'title', object);
+  Future<Id> putById(BigEventSchema object) {
+    return putByIndex(r'id', object);
   }
 
-  Id putByTitleSync(BigEventSchema object, {bool saveLinks = true}) {
-    return putByIndexSync(r'title', object, saveLinks: saveLinks);
+  Id putByIdSync(BigEventSchema object, {bool saveLinks = true}) {
+    return putByIndexSync(r'id', object, saveLinks: saveLinks);
   }
 
-  Future<List<Id>> putAllByTitle(List<BigEventSchema> objects) {
-    return putAllByIndex(r'title', objects);
+  Future<List<Id>> putAllById(List<BigEventSchema> objects) {
+    return putAllByIndex(r'id', objects);
   }
 
-  List<Id> putAllByTitleSync(List<BigEventSchema> objects,
+  List<Id> putAllByIdSync(List<BigEventSchema> objects,
       {bool saveLinks = true}) {
-    return putAllByIndexSync(r'title', objects, saveLinks: saveLinks);
+    return putAllByIndexSync(r'id', objects, saveLinks: saveLinks);
   }
 }
 
@@ -293,45 +303,45 @@ extension BigEventSchemaQueryWhere
     });
   }
 
-  QueryBuilder<BigEventSchema, BigEventSchema, QAfterWhereClause> titleEqualTo(
-      String title) {
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterWhereClause> idEqualTo(
+      String id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'title',
-        value: [title],
+        indexName: r'id',
+        value: [id],
       ));
     });
   }
 
-  QueryBuilder<BigEventSchema, BigEventSchema, QAfterWhereClause>
-      titleNotEqualTo(String title) {
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterWhereClause> idNotEqualTo(
+      String id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'title',
+              indexName: r'id',
               lower: [],
-              upper: [title],
+              upper: [id],
               includeUpper: false,
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'title',
-              lower: [title],
+              indexName: r'id',
+              lower: [id],
               includeLower: false,
               upper: [],
             ));
       } else {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'title',
-              lower: [title],
+              indexName: r'id',
+              lower: [id],
               includeLower: false,
               upper: [],
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'title',
+              indexName: r'id',
               lower: [],
-              upper: [title],
+              upper: [id],
               includeUpper: false,
             ));
       }
@@ -386,6 +396,141 @@ extension BigEventSchemaQueryWhere
 
 extension BigEventSchemaQueryFilter
     on QueryBuilder<BigEventSchema, BigEventSchema, QFilterCondition> {
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterFilterCondition> idEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterFilterCondition>
+      idGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterFilterCondition>
+      idLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterFilterCondition> idBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'id',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterFilterCondition>
+      idStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterFilterCondition>
+      idEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterFilterCondition>
+      idContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterFilterCondition> idMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'id',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterFilterCondition>
+      idIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'id',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterFilterCondition>
+      idIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'id',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<BigEventSchema, BigEventSchema, QAfterFilterCondition>
       imageUrlEqualTo(
     String value, {
@@ -869,6 +1014,18 @@ extension BigEventSchemaQueryLinks
 
 extension BigEventSchemaQuerySortBy
     on QueryBuilder<BigEventSchema, BigEventSchema, QSortBy> {
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterSortBy> sortById() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.asc);
+    });
+  }
+
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterSortBy> sortByIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.desc);
+    });
+  }
+
   QueryBuilder<BigEventSchema, BigEventSchema, QAfterSortBy> sortByImageUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'imageUrl', Sort.asc);
@@ -923,6 +1080,18 @@ extension BigEventSchemaQuerySortBy
 
 extension BigEventSchemaQuerySortThenBy
     on QueryBuilder<BigEventSchema, BigEventSchema, QSortThenBy> {
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterSortBy> thenById() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.asc);
+    });
+  }
+
+  QueryBuilder<BigEventSchema, BigEventSchema, QAfterSortBy> thenByIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.desc);
+    });
+  }
+
   QueryBuilder<BigEventSchema, BigEventSchema, QAfterSortBy> thenByImageUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'imageUrl', Sort.asc);
@@ -990,6 +1159,13 @@ extension BigEventSchemaQuerySortThenBy
 
 extension BigEventSchemaQueryWhereDistinct
     on QueryBuilder<BigEventSchema, BigEventSchema, QDistinct> {
+  QueryBuilder<BigEventSchema, BigEventSchema, QDistinct> distinctById(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'id', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<BigEventSchema, BigEventSchema, QDistinct> distinctByImageUrl(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1023,6 +1199,12 @@ extension BigEventSchemaQueryProperty
   QueryBuilder<BigEventSchema, int, QQueryOperations> localIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'localId');
+    });
+  }
+
+  QueryBuilder<BigEventSchema, String, QQueryOperations> idProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'id');
     });
   }
 

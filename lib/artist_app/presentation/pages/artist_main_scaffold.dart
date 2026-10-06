@@ -15,7 +15,7 @@ class ArtistMainScaffold extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(artistTabProvider);
 
-    final List<Widget> pages = const [
+    const List<Widget> pages = [
       ArtistHomePage(),
       ArtistCompetitionPage(),
       ArtistVotePage(),

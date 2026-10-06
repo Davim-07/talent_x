@@ -1,6 +1,6 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'vote.dart';
@@ -9,292 +9,248 @@ part of 'vote.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
+Vote _$VoteFromJson(Map<String, dynamic> json) {
+  return _Vote.fromJson(json);
+}
 
 /// @nodoc
 mixin _$Vote {
+  String get id => throw _privateConstructorUsedError;
+  String get competitionId => throw _privateConstructorUsedError;
+  String get voterId => throw _privateConstructorUsedError;
+  String get targetEntryId => throw _privateConstructorUsedError;
+  int get txPoints => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
 
- String get id; String get competitionId; String get voterId; String get targetEntryId; int get txPoints; DateTime get createdAt;
-/// Create a copy of Vote
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$VoteCopyWith<Vote> get copyWith => _$VoteCopyWithImpl<Vote>(this as Vote, _$identity);
-
-  /// Serializes this Vote to a JSON map.
-  Map<String, dynamic> toJson();
-
-
-@override
-bool operator ==(Object other) {
-  final _this = this as Vote;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Vote&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.competitionId, _this.competitionId) || other.competitionId == _this.competitionId)&&(identical(other.voterId, _this.voterId) || other.voterId == _this.voterId)&&(identical(other.targetEntryId, _this.targetEntryId) || other.targetEntryId == _this.targetEntryId)&&(identical(other.txPoints, _this.txPoints) || other.txPoints == _this.txPoints)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode {
-  final _this = this as Vote;
-  return Object.hash(runtimeType,_this.id,_this.competitionId,_this.voterId,_this.targetEntryId,_this.txPoints,_this.createdAt);
-}
-
-@override
-String toString() {
-  final _this = this as Vote;
-  return 'Vote(id: ${_this.id}, competitionId: ${_this.competitionId}, voterId: ${_this.voterId}, targetEntryId: ${_this.targetEntryId}, txPoints: ${_this.txPoints}, createdAt: ${_this.createdAt})';
-}
-
-
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $VoteCopyWith<Vote> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract mixin class $VoteCopyWith<$Res>  {
-  factory $VoteCopyWith(Vote value, $Res Function(Vote) _then) = _$VoteCopyWithImpl;
-@useResult
-$Res call({
- String id, String competitionId, String voterId, String targetEntryId, int txPoints, DateTime createdAt
-});
-
-
-
-
+abstract class $VoteCopyWith<$Res> {
+  factory $VoteCopyWith(Vote value, $Res Function(Vote) then) =
+      _$VoteCopyWithImpl<$Res, Vote>;
+  @useResult
+  $Res call(
+      {String id,
+      String competitionId,
+      String voterId,
+      String targetEntryId,
+      int txPoints,
+      DateTime createdAt});
 }
+
 /// @nodoc
-class _$VoteCopyWithImpl<$Res>
+class _$VoteCopyWithImpl<$Res, $Val extends Vote>
     implements $VoteCopyWith<$Res> {
-  _$VoteCopyWithImpl(this._self, this._then);
+  _$VoteCopyWithImpl(this._value, this._then);
 
-  final Vote _self;
-  final $Res Function(Vote) _then;
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
-/// Create a copy of Vote
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? competitionId = null,Object? voterId = null,Object? targetEntryId = null,Object? txPoints = null,Object? createdAt = null,}) {
-  return _then(Vote(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,competitionId: null == competitionId ? _self.competitionId : competitionId // ignore: cast_nullable_to_non_nullable
-as String,voterId: null == voterId ? _self.voterId : voterId // ignore: cast_nullable_to_non_nullable
-as String,targetEntryId: null == targetEntryId ? _self.targetEntryId : targetEntryId // ignore: cast_nullable_to_non_nullable
-as String,txPoints: null == txPoints ? _self.txPoints : txPoints // ignore: cast_nullable_to_non_nullable
-as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime,
-  ));
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? competitionId = null,
+    Object? voterId = null,
+    Object? targetEntryId = null,
+    Object? txPoints = null,
+    Object? createdAt = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      competitionId: null == competitionId
+          ? _value.competitionId
+          : competitionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      voterId: null == voterId
+          ? _value.voterId
+          : voterId // ignore: cast_nullable_to_non_nullable
+              as String,
+      targetEntryId: null == targetEntryId
+          ? _value.targetEntryId
+          : targetEntryId // ignore: cast_nullable_to_non_nullable
+              as String,
+      txPoints: null == txPoints
+          ? _value.txPoints
+          : txPoints // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
+  }
 }
 
+/// @nodoc
+abstract class _$$VoteImplCopyWith<$Res> implements $VoteCopyWith<$Res> {
+  factory _$$VoteImplCopyWith(
+          _$VoteImpl value, $Res Function(_$VoteImpl) then) =
+      __$$VoteImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String competitionId,
+      String voterId,
+      String targetEntryId,
+      int txPoints,
+      DateTime createdAt});
 }
 
+/// @nodoc
+class __$$VoteImplCopyWithImpl<$Res>
+    extends _$VoteCopyWithImpl<$Res, _$VoteImpl>
+    implements _$$VoteImplCopyWith<$Res> {
+  __$$VoteImplCopyWithImpl(_$VoteImpl _value, $Res Function(_$VoteImpl) _then)
+      : super(_value, _then);
 
-/// Adds pattern-matching-related methods to [Vote].
-extension VotePatterns on Vote {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Vote value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _Vote() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Vote value)  $default,){
-final _that = this;
-switch (_that) {
-case _Vote():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Vote value)?  $default,){
-final _that = this;
-switch (_that) {
-case _Vote() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String competitionId,  String voterId,  String targetEntryId,  int txPoints,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _Vote() when $default != null:
-return $default(_that.id,_that.competitionId,_that.voterId,_that.targetEntryId,_that.txPoints,_that.createdAt);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String competitionId,  String voterId,  String targetEntryId,  int txPoints,  DateTime createdAt)  $default,) {final _that = this;
-switch (_that) {
-case _Vote():
-return $default(_that.id,_that.competitionId,_that.voterId,_that.targetEntryId,_that.txPoints,_that.createdAt);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String competitionId,  String voterId,  String targetEntryId,  int txPoints,  DateTime createdAt)?  $default,) {final _that = this;
-switch (_that) {
-case _Vote() when $default != null:
-return $default(_that.id,_that.competitionId,_that.voterId,_that.targetEntryId,_that.txPoints,_that.createdAt);case _:
-  return null;
-
-}
-}
-
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? competitionId = null,
+    Object? voterId = null,
+    Object? targetEntryId = null,
+    Object? txPoints = null,
+    Object? createdAt = null,
+  }) {
+    return _then(_$VoteImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      competitionId: null == competitionId
+          ? _value.competitionId
+          : competitionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      voterId: null == voterId
+          ? _value.voterId
+          : voterId // ignore: cast_nullable_to_non_nullable
+              as String,
+      targetEntryId: null == targetEntryId
+          ? _value.targetEntryId
+          : targetEntryId // ignore: cast_nullable_to_non_nullable
+              as String,
+      txPoints: null == txPoints
+          ? _value.txPoints
+          : txPoints // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
+class _$VoteImpl implements _Vote {
+  const _$VoteImpl(
+      {required this.id,
+      required this.competitionId,
+      required this.voterId,
+      required this.targetEntryId,
+      this.txPoints = 2,
+      required this.createdAt});
 
-class _Vote implements Vote {
-  const _Vote({required this.id, required this.competitionId, required this.voterId, required this.targetEntryId, this.txPoints = 2, required this.createdAt});
-  factory _Vote.fromJson(Map<String, dynamic> json) => _$VoteFromJson(json);
+  factory _$VoteImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VoteImplFromJson(json);
 
-@override final  String id;
-@override final  String competitionId;
-@override final  String voterId;
-@override final  String targetEntryId;
-@override@JsonKey() final  int txPoints;
-@override final  DateTime createdAt;
+  @override
+  final String id;
+  @override
+  final String competitionId;
+  @override
+  final String voterId;
+  @override
+  final String targetEntryId;
+  @override
+  @JsonKey()
+  final int txPoints;
+  @override
+  final DateTime createdAt;
 
-/// Create a copy of Vote
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$VoteCopyWith<_Vote> get copyWith => __$VoteCopyWithImpl<_Vote>(this, _$identity);
-
-@override
-Map<String, dynamic> toJson() {
-  return _$VoteToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Vote&&(identical(other.id, id) || other.id == id)&&(identical(other.competitionId, competitionId) || other.competitionId == competitionId)&&(identical(other.voterId, voterId) || other.voterId == voterId)&&(identical(other.targetEntryId, targetEntryId) || other.targetEntryId == targetEntryId)&&(identical(other.txPoints, txPoints) || other.txPoints == txPoints)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode {
-    return Object.hash(runtimeType,id,competitionId,voterId,targetEntryId,txPoints,createdAt);
-}
-
-@override
-String toString() {
+  @override
+  String toString() {
     return 'Vote(id: $id, competitionId: $competitionId, voterId: $voterId, targetEntryId: $targetEntryId, txPoints: $txPoints, createdAt: $createdAt)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$VoteImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.competitionId, competitionId) ||
+                other.competitionId == competitionId) &&
+            (identical(other.voterId, voterId) || other.voterId == voterId) &&
+            (identical(other.targetEntryId, targetEntryId) ||
+                other.targetEntryId == targetEntryId) &&
+            (identical(other.txPoints, txPoints) ||
+                other.txPoints == txPoints) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, competitionId, voterId,
+      targetEntryId, txPoints, createdAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$VoteImplCopyWith<_$VoteImpl> get copyWith =>
+      __$$VoteImplCopyWithImpl<_$VoteImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$VoteImplToJson(
+      this,
+    );
+  }
 }
 
+abstract class _Vote implements Vote {
+  const factory _Vote(
+      {required final String id,
+      required final String competitionId,
+      required final String voterId,
+      required final String targetEntryId,
+      final int txPoints,
+      required final DateTime createdAt}) = _$VoteImpl;
 
+  factory _Vote.fromJson(Map<String, dynamic> json) = _$VoteImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get competitionId;
+  @override
+  String get voterId;
+  @override
+  String get targetEntryId;
+  @override
+  int get txPoints;
+  @override
+  DateTime get createdAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$VoteImplCopyWith<_$VoteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
-
-/// @nodoc
-abstract mixin class _$VoteCopyWith<$Res> implements $VoteCopyWith<$Res> {
-  factory _$VoteCopyWith(_Vote value, $Res Function(_Vote) _then) = __$VoteCopyWithImpl;
-@override @useResult
-$Res call({
- String id, String competitionId, String voterId, String targetEntryId, int txPoints, DateTime createdAt
-});
-
-
-
-
-}
-/// @nodoc
-class __$VoteCopyWithImpl<$Res>
-    implements _$VoteCopyWith<$Res> {
-  __$VoteCopyWithImpl(this._self, this._then);
-
-  final _Vote _self;
-  final $Res Function(_Vote) _then;
-
-/// Create a copy of Vote
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? competitionId = null,Object? voterId = null,Object? targetEntryId = null,Object? txPoints = null,Object? createdAt = null,}) {
-  return _then(_Vote(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,competitionId: null == competitionId ? _self.competitionId : competitionId // ignore: cast_nullable_to_non_nullable
-as String,voterId: null == voterId ? _self.voterId : voterId // ignore: cast_nullable_to_non_nullable
-as String,targetEntryId: null == targetEntryId ? _self.targetEntryId : targetEntryId // ignore: cast_nullable_to_non_nullable
-as String,txPoints: null == txPoints ? _self.txPoints : txPoints // ignore: cast_nullable_to_non_nullable
-as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime,
-  ));
-}
-
-
-}
-
-// dart format on

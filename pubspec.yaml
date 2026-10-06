@@ -21,6 +21,7 @@ dependencies:
   path_provider: ^2.1.2
   freezed_annotation: ^2.4.4 # <--- CORRIGÉ (compatible avec freezed 2.5.2)
   json_annotation: ^4.9.0    # <--- CORRIGÉ (compatible avec json_serializable 6.8.0)
+  firebase_auth: ^5.7.0
 
 dev_dependencies:
   flutter_test:

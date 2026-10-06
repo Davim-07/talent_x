@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:talent_x/core/domain/entities/artist.dart';
-import 'package:talent_x/core/domain/entities/vote.dart';
 import 'package:talent_x/core/providers/artist_provider.dart';
 import 'package:talent_x/core/providers/competition_provider.dart';
 import 'package:talent_x/core/providers/vote_provider.dart';

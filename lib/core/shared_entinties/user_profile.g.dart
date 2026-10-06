@@ -6,22 +6,24 @@ part of 'user_profile.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => _UserProfile(
-  uid: json['uid'] as String,
-  email: json['email'] as String,
-  fullName: json['fullName'] as String,
-  country: json['country'] as String,
-  province: json['province'] as String,
-  district: json['district'] as String,
-  artCategory: json['artCategory'] as String,
-  role: json['role'] as String,
-  medals:
-      (json['medals'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-      const [],
-  assignedCompetitionId: json['assignedCompetitionId'] as String?,
-);
+_$UserProfileImpl _$$UserProfileImplFromJson(Map<String, dynamic> json) =>
+    _$UserProfileImpl(
+      uid: json['uid'] as String,
+      email: json['email'] as String,
+      fullName: json['fullName'] as String,
+      country: json['country'] as String,
+      province: json['province'] as String,
+      district: json['district'] as String,
+      artCategory: json['artCategory'] as String,
+      role: json['role'] as String,
+      medals: (json['medals'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      assignedCompetitionId: json['assignedCompetitionId'] as String?,
+    );
 
-Map<String, dynamic> _$UserProfileToJson(_UserProfile instance) =>
+Map<String, dynamic> _$$UserProfileImplToJson(_$UserProfileImpl instance) =>
     <String, dynamic>{
       'uid': instance.uid,
       'email': instance.email,

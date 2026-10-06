@@ -7,6 +7,7 @@ class JuryRankSchema {
   Id localId = Isar.autoIncrement;
 
   @Index(unique: true, replace: true)
+  late String id;
   late String juryId;
   late String artistId;
   late String competitionId;

@@ -9,8 +9,8 @@ class CatalogScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Text('TalentX'),
-        actions: [
+        leading: const Text('TalentX'),
+        actions: const [
           Icon(Icons.notifications),
           SizedBox(width: 10),
           Icon(Icons.search),
@@ -18,14 +18,14 @@ class CatalogScreen extends StatelessWidget {
         ]
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Column(
+      body: const Column(
         children: [
         Expanded(
           flex: 1,
-          child: const BigEventCard(),),
+          child: BigEventCard(),),
         Expanded(
           flex: 1,
-          child: const FeaturedArtistCard(),),
+          child: FeaturedArtistCard(),),
       ],) 
     );
   }

@@ -32,17 +32,17 @@ class FeaturedArtistCard extends ConsumerWidget {
                   ),
                   child: Image.network(artists[index].imageUrl)
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(artists[index].name),
-                Spacer(),
-                Text(artists[index].category, style: TextStyle(color: Colors.grey, fontSize: 20,)),
+                const Spacer(),
+                Text(artists[index].category, style: const TextStyle(color: Colors.grey, fontSize: 20,)),
                 FilledButton(
                   style: FilledButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.secondary,
                     foregroundColor: Theme.of(context).colorScheme.onSurface,
                   ),
                   onPressed: null,
-                  child: Text('VOTE'),
+                  child: const Text('VOTE'),
                 ),
               ],
             )

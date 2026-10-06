@@ -2,11 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'admin_app/presentation/pages/admin_main_page.dart';
+import 'artist_app/presentation/pages/artist_main_scaffold.dart';
 import 'auth_app/presentation/pages/login_page.dart';
 import 'auth_app/presentation/pages/register_page.dart';
-import 'admin_app/presentation/pages/admin_main_page.dart';
-import 'jury_app/presentation/pages/jury_dashboard_page.dart';
-import 'artist_app/presentation/pages/artist_main_scaffold.dart';
 import 'core/data/datasources/local_datasource.dart';
 import 'core/data/datasources/remote_datasource.dart';
 import 'core/data/repositories/artist_repository_impl.dart';
@@ -14,26 +13,32 @@ import 'core/data/repositories/big_event_repository_impl.dart';
 import 'core/data/repositories/competition_repository_impl.dart';
 import 'core/data/repositories/vote_repository_impl.dart';
 import 'core/utils/database_seeder.dart';
+import 'core/utils/firestore_seeder.dart'; // Import du seeder Firestore
 import 'core/utils/isar_service.dart';
 import 'firebase_options.dart';
+import 'jury_app/presentation/pages/jury_dashboard_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 1. Initialisation Firebase
+  // 1. Initialisation Firebase & Seeding Firestore Remote
   try {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+
+    // Injection des données de test dans Firestore
+    await FirestoreSeeder.seedTestData();
+    debugPrint('✅ FirestoreSeeder exécuté avec succès !');
   } catch (e) {
-    debugPrint('Avertissement Firebase: $e');
+    debugPrint('Avertissement Firebase / FirestoreSeeder: $e');
   }
 
   // 2. Initialisation Isar DB
   try {
     await IsarService.init();
 
-    // 3. Amorçage des données initiales si vide
+    // 3. Amorçage des données Isar locales si vide
     final localDS = IsarLocalDataSource(IsarService.instance);
     final remoteDS = FirestoreRemoteDataSource();
     final compRepo =

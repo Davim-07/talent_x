@@ -27,18 +27,23 @@ const JuryRankSchemaSchema = CollectionSchema(
       name: r'competitionId',
       type: IsarType.string,
     ),
-    r'isSynced': PropertySchema(
+    r'id': PropertySchema(
       id: 2,
+      name: r'id',
+      type: IsarType.string,
+    ),
+    r'isSynced': PropertySchema(
+      id: 3,
       name: r'isSynced',
       type: IsarType.bool,
     ),
     r'juryId': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'juryId',
       type: IsarType.string,
     ),
     r'rank': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'rank',
       type: IsarType.long,
     )
@@ -49,14 +54,14 @@ const JuryRankSchemaSchema = CollectionSchema(
   deserializeProp: _juryRankSchemaDeserializeProp,
   idName: r'localId',
   indexes: {
-    r'juryId': IndexSchema(
-      id: 7158465331207096192,
-      name: r'juryId',
+    r'id': IndexSchema(
+      id: -3268401673993471357,
+      name: r'id',
       unique: true,
       replace: true,
       properties: [
         IndexPropertySchema(
-          name: r'juryId',
+          name: r'id',
           type: IndexType.hash,
           caseSensitive: true,
         )
@@ -92,6 +97,7 @@ int _juryRankSchemaEstimateSize(
   var bytesCount = offsets.last;
   bytesCount += 3 + object.artistId.length * 3;
   bytesCount += 3 + object.competitionId.length * 3;
+  bytesCount += 3 + object.id.length * 3;
   bytesCount += 3 + object.juryId.length * 3;
   return bytesCount;
 }
@@ -104,9 +110,10 @@ void _juryRankSchemaSerialize(
 ) {
   writer.writeString(offsets[0], object.artistId);
   writer.writeString(offsets[1], object.competitionId);
-  writer.writeBool(offsets[2], object.isSynced);
-  writer.writeString(offsets[3], object.juryId);
-  writer.writeLong(offsets[4], object.rank);
+  writer.writeString(offsets[2], object.id);
+  writer.writeBool(offsets[3], object.isSynced);
+  writer.writeString(offsets[4], object.juryId);
+  writer.writeLong(offsets[5], object.rank);
 }
 
 JuryRankSchema _juryRankSchemaDeserialize(
@@ -118,10 +125,11 @@ JuryRankSchema _juryRankSchemaDeserialize(
   final object = JuryRankSchema();
   object.artistId = reader.readString(offsets[0]);
   object.competitionId = reader.readString(offsets[1]);
-  object.isSynced = reader.readBool(offsets[2]);
-  object.juryId = reader.readString(offsets[3]);
+  object.id = reader.readString(offsets[2]);
+  object.isSynced = reader.readBool(offsets[3]);
+  object.juryId = reader.readString(offsets[4]);
   object.localId = id;
-  object.rank = reader.readLong(offsets[4]);
+  object.rank = reader.readLong(offsets[5]);
   return object;
 }
 
@@ -137,10 +145,12 @@ P _juryRankSchemaDeserializeProp<P>(
     case 1:
       return (reader.readString(offset)) as P;
     case 2:
-      return (reader.readBool(offset)) as P;
-    case 3:
       return (reader.readString(offset)) as P;
+    case 3:
+      return (reader.readBool(offset)) as P;
     case 4:
+      return (reader.readString(offset)) as P;
+    case 5:
       return (reader.readLong(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -161,57 +171,57 @@ void _juryRankSchemaAttach(
 }
 
 extension JuryRankSchemaByIndex on IsarCollection<JuryRankSchema> {
-  Future<JuryRankSchema?> getByJuryId(String juryId) {
-    return getByIndex(r'juryId', [juryId]);
+  Future<JuryRankSchema?> getById(String id) {
+    return getByIndex(r'id', [id]);
   }
 
-  JuryRankSchema? getByJuryIdSync(String juryId) {
-    return getByIndexSync(r'juryId', [juryId]);
+  JuryRankSchema? getByIdSync(String id) {
+    return getByIndexSync(r'id', [id]);
   }
 
-  Future<bool> deleteByJuryId(String juryId) {
-    return deleteByIndex(r'juryId', [juryId]);
+  Future<bool> deleteById(String id) {
+    return deleteByIndex(r'id', [id]);
   }
 
-  bool deleteByJuryIdSync(String juryId) {
-    return deleteByIndexSync(r'juryId', [juryId]);
+  bool deleteByIdSync(String id) {
+    return deleteByIndexSync(r'id', [id]);
   }
 
-  Future<List<JuryRankSchema?>> getAllByJuryId(List<String> juryIdValues) {
-    final values = juryIdValues.map((e) => [e]).toList();
-    return getAllByIndex(r'juryId', values);
+  Future<List<JuryRankSchema?>> getAllById(List<String> idValues) {
+    final values = idValues.map((e) => [e]).toList();
+    return getAllByIndex(r'id', values);
   }
 
-  List<JuryRankSchema?> getAllByJuryIdSync(List<String> juryIdValues) {
-    final values = juryIdValues.map((e) => [e]).toList();
-    return getAllByIndexSync(r'juryId', values);
+  List<JuryRankSchema?> getAllByIdSync(List<String> idValues) {
+    final values = idValues.map((e) => [e]).toList();
+    return getAllByIndexSync(r'id', values);
   }
 
-  Future<int> deleteAllByJuryId(List<String> juryIdValues) {
-    final values = juryIdValues.map((e) => [e]).toList();
-    return deleteAllByIndex(r'juryId', values);
+  Future<int> deleteAllById(List<String> idValues) {
+    final values = idValues.map((e) => [e]).toList();
+    return deleteAllByIndex(r'id', values);
   }
 
-  int deleteAllByJuryIdSync(List<String> juryIdValues) {
-    final values = juryIdValues.map((e) => [e]).toList();
-    return deleteAllByIndexSync(r'juryId', values);
+  int deleteAllByIdSync(List<String> idValues) {
+    final values = idValues.map((e) => [e]).toList();
+    return deleteAllByIndexSync(r'id', values);
   }
 
-  Future<Id> putByJuryId(JuryRankSchema object) {
-    return putByIndex(r'juryId', object);
+  Future<Id> putById(JuryRankSchema object) {
+    return putByIndex(r'id', object);
   }
 
-  Id putByJuryIdSync(JuryRankSchema object, {bool saveLinks = true}) {
-    return putByIndexSync(r'juryId', object, saveLinks: saveLinks);
+  Id putByIdSync(JuryRankSchema object, {bool saveLinks = true}) {
+    return putByIndexSync(r'id', object, saveLinks: saveLinks);
   }
 
-  Future<List<Id>> putAllByJuryId(List<JuryRankSchema> objects) {
-    return putAllByIndex(r'juryId', objects);
+  Future<List<Id>> putAllById(List<JuryRankSchema> objects) {
+    return putAllByIndex(r'id', objects);
   }
 
-  List<Id> putAllByJuryIdSync(List<JuryRankSchema> objects,
+  List<Id> putAllByIdSync(List<JuryRankSchema> objects,
       {bool saveLinks = true}) {
-    return putAllByIndexSync(r'juryId', objects, saveLinks: saveLinks);
+    return putAllByIndexSync(r'id', objects, saveLinks: saveLinks);
   }
 }
 
@@ -302,45 +312,45 @@ extension JuryRankSchemaQueryWhere
     });
   }
 
-  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterWhereClause> juryIdEqualTo(
-      String juryId) {
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterWhereClause> idEqualTo(
+      String id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'juryId',
-        value: [juryId],
+        indexName: r'id',
+        value: [id],
       ));
     });
   }
 
-  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterWhereClause>
-      juryIdNotEqualTo(String juryId) {
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterWhereClause> idNotEqualTo(
+      String id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'juryId',
+              indexName: r'id',
               lower: [],
-              upper: [juryId],
+              upper: [id],
               includeUpper: false,
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'juryId',
-              lower: [juryId],
+              indexName: r'id',
+              lower: [id],
               includeLower: false,
               upper: [],
             ));
       } else {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'juryId',
-              lower: [juryId],
+              indexName: r'id',
+              lower: [id],
               includeLower: false,
               upper: [],
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'juryId',
+              indexName: r'id',
               lower: [],
-              upper: [juryId],
+              upper: [id],
               includeUpper: false,
             ));
       }
@@ -667,6 +677,141 @@ extension JuryRankSchemaQueryFilter
     });
   }
 
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterFilterCondition> idEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterFilterCondition>
+      idGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterFilterCondition>
+      idLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterFilterCondition> idBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'id',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterFilterCondition>
+      idStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterFilterCondition>
+      idEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterFilterCondition>
+      idContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterFilterCondition> idMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'id',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterFilterCondition>
+      idIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'id',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterFilterCondition>
+      idIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'id',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterFilterCondition>
       isSyncedEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
@@ -961,6 +1106,18 @@ extension JuryRankSchemaQuerySortBy
     });
   }
 
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterSortBy> sortById() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.asc);
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterSortBy> sortByIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.desc);
+    });
+  }
+
   QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterSortBy> sortByIsSynced() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isSynced', Sort.asc);
@@ -1026,6 +1183,18 @@ extension JuryRankSchemaQuerySortThenBy
       thenByCompetitionIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'competitionId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterSortBy> thenById() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.asc);
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QAfterSortBy> thenByIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.desc);
     });
   }
 
@@ -1098,6 +1267,13 @@ extension JuryRankSchemaQueryWhereDistinct
     });
   }
 
+  QueryBuilder<JuryRankSchema, JuryRankSchema, QDistinct> distinctById(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'id', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<JuryRankSchema, JuryRankSchema, QDistinct> distinctByIsSynced() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isSynced');
@@ -1136,6 +1312,12 @@ extension JuryRankSchemaQueryProperty
       competitionIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'competitionId');
+    });
+  }
+
+  QueryBuilder<JuryRankSchema, String, QQueryOperations> idProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'id');
     });
   }
 
